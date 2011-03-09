@@ -29,9 +29,10 @@ public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
 	public YatzyPresentasjonsmodellImpl(final YatzyBeregner yatzyBeregner) {
 		this.yatzyBeregner = yatzyBeregner;
 		initModell();
+		initActions();
+		nyRunde();
 	}
 
-	@SuppressWarnings("serial")
 	private void initModell() {
 		valgtKombinsajonModel = new ComponentValueModel(new ValueHolder());
 		kombinasjonerModel = new SelectionInList<Yatzykombinasjon>(Yatzykombinasjon.values());
@@ -50,7 +51,10 @@ public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
 		poengsumModell.setEditable(false);
 		kastTellerModell = new ComponentValueModel(new ValueHolder(0));
 		kastTellerModell.setEditable(false);
-		
+	}
+
+	@SuppressWarnings("serial")
+	private void initActions() {
 		kastAction = new AbstractAction("Kast") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -71,8 +75,6 @@ public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
 				beregnProengsum();
 			}
 		});
-		
-		nyRunde();
 	}
 
 	@Override
