@@ -102,7 +102,7 @@ namespace Yatzy.ViewModel
             get
             {
                 if (_antallKast == 0)
-                    return "Kom igjen å kast!";
+                    return "Let's start!";
 
                 return string.Format("{0}. kast", _antallKast);
             }
