@@ -1,0 +1,118 @@
+﻿<Window x:Class="Yatzy.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Yatzy" Height="287" Width="387" ResizeMode="NoResize" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:Yatzy.ViewModel">
+    <Window.DataContext>
+        <my:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="TerningImage" TargetType="{x:Type Image}">
+            <Setter Property="Stretch" Value="None"/>
+            <Style.Triggers>
+                <Trigger Property="Tag" Value="0">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/ukjent.gif"/>                        
+                </Trigger>
+                <Trigger Property="Tag" Value="1">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/terning1.gif"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="2">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/terning2.gif"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="3">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/terning3.gif"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="4">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/terning4.gif"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="5">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/terning5.gif"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="6">
+                    <Setter Property="Image.Source" Value="/Yatzy;component/Resources/terning6.gif"/>
+                </Trigger>
+            </Style.Triggers>
+
+
+
+
+
+        </Style>
+        <Style x:Key="TerningCheckbox" TargetType="{x:Type CheckBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="InnerImage" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Opacity" TargetName="InnerImage" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <StackPanel>
+            <TextBlock Text="{Binding Path=KastLabel}" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" TextDecorations="Underline" Margin="0,0,0,10" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60">
+                <CheckBox Style="{DynamicResource TerningCheckbox}" Margin="0,0,10,0" IsChecked="{Binding Path=HoldTerninger[0]}">
+                    <Image Style="{DynamicResource TerningImage}" Tag="{Binding TerningVerdier[0]}" />
+                </CheckBox>
+                <CheckBox Style="{DynamicResource TerningCheckbox}" Margin="0,0,10,0" IsChecked="{Binding Path=HoldTerninger[1]}">
+                    <Image Style="{DynamicResource TerningImage}" Tag="{Binding TerningVerdier[1]}" />
+                </CheckBox>
+                <CheckBox Style="{DynamicResource TerningCheckbox}" Margin="0,0,10,0" IsChecked="{Binding Path=HoldTerninger[2]}">
+                    <Image Style="{DynamicResource TerningImage}" Tag="{Binding TerningVerdier[2]}" />
+                </CheckBox>
+                <CheckBox Style="{DynamicResource TerningCheckbox}" Margin="0,0,10,0" IsChecked="{Binding Path=HoldTerninger[3]}">
+                    <Image Style="{DynamicResource TerningImage}" Tag="{Binding TerningVerdier[3]}" />
+                </CheckBox>
+                <CheckBox Style="{DynamicResource TerningCheckbox}" Margin="0,0,10,0" IsChecked="{Binding Path=HoldTerninger[4]}">
+                    <Image Style="{DynamicResource TerningImage}" Tag="{Binding TerningVerdier[4]}" />
+                </CheckBox>
+
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Kast" FontSize="12" FontWeight="Bold" Margin="0,0,10,0" Command="{Binding Path=KastCommand}" />
+                <Button Content="Ny runde" FontSize="12" FontWeight="Bold" Command="{Binding Path=NyRundeCommand}" />
+            </StackPanel>
+            <Grid Margin="10,25,10,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0,5"/>
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Text="Yatzy kombinasjon:" />
+                <ComboBox x:Name="cbxKombinasjon" Grid.Column="1" HorizontalAlignment="Left" Width="175" VerticalAlignment="Center" ItemsSource="{Binding Path=YatzyKombinasjoner}" SelectedValue="{Binding Path=ValgtKombinasjon, Mode=TwoWay}" SelectedIndex="-1" Text="" />
+                <TextBlock Grid.Row="1" Text="Poengsum:" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Poengsum}" />
+                <Button Grid.Row="2" Content="Beregn poeng" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,10,0,0" Width="100" Command="{Binding Path=BeregnPoengCommand}" IsEnabled="{Binding}" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

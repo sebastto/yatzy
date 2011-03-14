@@ -1,0 +1,4 @@
+# Binærfiler og VS build output
+bin/
+obj/
+*.suo
