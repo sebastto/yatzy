@@ -1,31 +1,49 @@
 package no.mesan.workmanship.yatzy.domene;
 
 
-public enum Yatzykombinasjon {
-	ENERE("Enere"),
-	TOERE("Toere"),
-	TREERE("Treere"),
-	FIRERE("Firere"),
-	FEMMERE("Femmere"),
-	SEKSERE("Seksere"),
-	ETT_PAR("Ett par"),
-	TO_PAR("To par"),
-	TRE_LIKE("Tre like"),
-	FIRE_LIKE("Fire like"),
-	LITEN_STRAIGHT("Liten straight"),
-	STOR_STRAIGHT("Stor straight"),
-	HUS("Hus"),
-	SJANSE("Sjanse"),
-	YATZY("Yatzy");
-	
-	private final String navn;
+import no.mesan.workmanship.yatzy.beregning.EnereBeregner;
+import no.mesan.workmanship.yatzy.beregning.KastBeregner;
 
-	private Yatzykombinasjon(final String navn) {
-		this.navn = navn;
-	}
-	
-	@Override
-	public String toString() {
-		return navn;
-	}
+public enum Yatzykombinasjon implements KastBeregner {
+    ENERE("Enere", new EnereBeregner()),
+    TOERE("Toere", null),
+    TREERE("Treere", null),
+    FIRERE("Firere", null),
+    FEMMERE("Femmere", null),
+    SEKSERE("Seksere", null),
+    ETT_PAR("Ett par", null),
+    TO_PAR("To par", null),
+    TRE_LIKE("Tre like", null),
+    FIRE_LIKE("Fire like", null),
+    LITEN_STRAIGHT("Liten straight", null),
+    STOR_STRAIGHT("Stor straight", null),
+    HUS("Hus", null),
+    SJANSE("Sjanse", null),
+    YATZY("Yatzy", null);
+
+    private final String navn;
+    private KastBeregner faktiskBeregner;
+
+    private Yatzykombinasjon(final String navn, final KastBeregner faktiskBeregner) {
+        this.navn = navn;
+        this.faktiskBeregner = faktiskBeregner;
+    }
+
+    @Override
+    public Integer beregnPoengForKast(Kast kast) {
+        return faktiskBeregner.beregnPoengForKast(kast);
+    }
+
+    KastBeregner getFaktiskBeregner() {
+        return faktiskBeregner;
+    }
+
+    void setFaktiskBeregner(KastBeregner faktiskBeregner) {
+        this.faktiskBeregner = faktiskBeregner;
+    }
+
+    @Override
+    public String toString() {
+        return navn;
+    }
 }

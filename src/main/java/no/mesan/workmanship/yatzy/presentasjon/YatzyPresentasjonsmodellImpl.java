@@ -144,7 +144,10 @@ public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
 
 	private void beregnProengsum() {
 		final Integer[] terninger = hentTerninger();
+        /// todo lage Kast av terningene
+
 		final Yatzykombinasjon valgtKombinasjon = kombinasjonerModel.getSelection();
+        // todo bruke Kast som input
 		final Integer nyPoengsum = yatzyBeregner.beregnPoengsum(valgtKombinasjon, terninger);
 		poengsumModell.setValue(nyPoengsum);
 	}
