@@ -7,6 +7,6 @@ namespace Yatzy.Model
 {
    public  interface IYatzyBeregner
     {
-        int BeregnResultat(YatzyKombinasjon kombinasjon, Kast kast);
+        int BeregnPoeng(Kast kast);
     }
 }

@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Yatzy.Model
 {
-    [System.ComponentModel.DefaultValue(null)]
     public enum YatzyKombinasjon
     {
         NotSet,

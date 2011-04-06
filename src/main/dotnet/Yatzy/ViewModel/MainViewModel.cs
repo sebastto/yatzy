@@ -15,7 +15,7 @@ namespace Yatzy.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly IYatzyBeregner _beregner;
+        private readonly YatzyBeregnerFactory _beregnerFactory=new YatzyBeregnerFactory();
         private int _antallKast = 0;
         Random random = new Random();
 
@@ -25,11 +25,10 @@ namespace Yatzy.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MainViewModel() : this(new DummyYatzyBeregner()) { }
 
-        public MainViewModel(IYatzyBeregner beregner)
+        public MainViewModel()
         {
-            _beregner = beregner;
+            //_beregner = beregner;
 
             CreateCommands();
         }
@@ -162,7 +161,7 @@ namespace Yatzy.ViewModel
             if (_valgtKombinasjon == YatzyKombinasjon.NotSet || AktivtKast == null)
                 throw new InvalidOperationException("Kan ikke beregne poengsum uten et gyldig kast yatzykombinasjon");
 
-            Poengsum = _beregner.BeregnResultat(ValgtKombinasjon, AktivtKast);
+            Poengsum = _beregnerFactory.LagBeregnerForKombinasjon(ValgtKombinasjon).BeregnPoeng(AktivtKast);
         }
 
         private void NotifyPropertyChanged(string propertyName)

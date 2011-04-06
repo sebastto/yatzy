@@ -8,12 +8,19 @@ namespace Yatzy.Model
     public class Kast
     {
         private Random _randomGenerator = new Random();
-        public Terning[] Terninger { get; private set; }
+        public Terning[] Terninger { get; set; }
 
         public Kast()
         {
             Terninger = new Terning[5];
             TrillTerninger();
+        }
+
+        public Kast(params int[] øyne)
+        {
+            Terninger = new Terning[øyne.Length];
+            for (int i = 0; i < øyne.Length; i++)
+                Terninger[i] = new Terning(øyne[i]);
         }
 
         /// <summary>

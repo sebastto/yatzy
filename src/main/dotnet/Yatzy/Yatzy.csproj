@@ -61,11 +61,25 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Framework\SimpleCommand.cs" />
-    <Compile Include="Model\DummyYatzyBeregner.cs" />
-    <Compile Include="Model\IYatzyBeregner.cs" />
-    <Compile Include="Model\Kast.cs" />
-    <Compile Include="Model\Terning.cs" />
-    <Compile Include="Model\YatzyKombinasjon.cs" />
+    <Compile Include="Model\Beregnere\EnereBeregner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\IYatzyBeregner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Kast.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Terning.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\YatzyBeregnerFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\IYatzyBrett.cs" />
+    <Compile Include="Model\YatzyKombinasjon.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
