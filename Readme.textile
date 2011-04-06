@@ -1,5 +1,5 @@
 h1. Rammeverk for yatzy-kata
 
-Utgangspunkt for workmanship-fagkveld "Tvungen OO" (også kalt Object Calisthenics)
+Utgangspunkt for workmanship-fagkveld "Tvungen OO" (også kalt Object Calisthenics) og TDD-fagkveld
 
 
