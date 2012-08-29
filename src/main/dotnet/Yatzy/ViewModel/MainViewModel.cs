@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
-using Yatzy.Model;
+using System.Linq;
 using System.Windows.Input;
 using Yatzy.Framework;
-using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Collections;
-using System.Timers;
+using Yatzy.Model;
 
 namespace Yatzy.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly YatzyBeregnerFactory _beregnerFactory=new YatzyBeregnerFactory();
+        private readonly YatzyBeregnerFactory _beregnerFactory = new YatzyBeregnerFactory();
         private int _antallKast = 0;
-        Random random = new Random();
 
         public ICommand KastCommand { get; private set; }
         public ICommand NyRundeCommand { get; private set; }
@@ -25,16 +19,14 @@ namespace Yatzy.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
         public MainViewModel()
         {
-            //_beregner = beregner;
-
             CreateCommands();
         }
 
         private Kast _aktivtKast;
-        public Kast AktivtKast
+
+		public Kast AktivtKast
         {
             get { return _aktivtKast; }
             private set
@@ -62,8 +54,8 @@ namespace Yatzy.ViewModel
             }
         }
 
-
         private int _poengsum = 0;
+
         public int Poengsum
         {
             get { return _poengsum; }
@@ -77,8 +69,9 @@ namespace Yatzy.ViewModel
             }
         }
 
-        private YatzyKombinasjon _valgtKombinasjon = YatzyKombinasjon.NotSet;
-        public YatzyKombinasjon ValgtKombinasjon
+        private YatzyKombinasjon _valgtKombinasjon = YatzyKombinasjon.Ukjent;
+       
+		public YatzyKombinasjon ValgtKombinasjon
         {
             get { return _valgtKombinasjon; }
             set
@@ -93,7 +86,7 @@ namespace Yatzy.ViewModel
 
         public IEnumerable<string> YatzyKombinasjoner
         {
-            get { return Enum.GetNames(typeof(YatzyKombinasjon)).Where(o=>o !="NotSet") ?? new string[] { "Ingen kombinasjoner funnet" }; }
+            get { return Enum.GetNames(typeof(YatzyKombinasjon)).Where(o=>o !="Ukjent") ?? new string[] { "Ingen kombinasjoner funnet" }; }
         }
 
         public string KastLabel
@@ -101,14 +94,15 @@ namespace Yatzy.ViewModel
             get
             {
                 if (_antallKast == 0)
-                    return "Let's start!";
+                    return "Diz iz how I roll";
 
                 return string.Format("{0}. kast", _antallKast);
             }
         }
 
         private bool[] _holdTerninger = new bool[5];
-        public bool[] HoldTerninger
+
+		public bool[] HoldTerninger
         {
             get { return _holdTerninger; }
             set
@@ -117,13 +111,12 @@ namespace Yatzy.ViewModel
                 NotifyPropertyChanged("HoldTerninger");
             }
         }
-       
 
         private void CreateCommands()
         {
-            KastCommand = new SimpleCommand(this.KastTerninger, o => _antallKast < 3);
-            NyRundeCommand = new SimpleCommand(this.NyRunde, o => true);
-            BeregnPoengCommand = new SimpleCommand(this.BeregnPoengsum, o => _antallKast == 3 && _valgtKombinasjon != YatzyKombinasjon.NotSet);
+            KastCommand			= new SimpleCommand(KastTerninger, o => _antallKast < 3);
+            NyRundeCommand		= new SimpleCommand(NyRunde, o => true);
+            BeregnPoengCommand	= new SimpleCommand(BeregnPoengsum, o => _antallKast == 3 && _valgtKombinasjon != YatzyKombinasjon.Ukjent);
         }
 
         private void KastTerninger()
@@ -149,7 +142,7 @@ namespace Yatzy.ViewModel
         {
             _antallKast = 0;
             AktivtKast = null;
-            ValgtKombinasjon = YatzyKombinasjon.NotSet;
+            ValgtKombinasjon = YatzyKombinasjon.Ukjent;
             Poengsum = 0;
             HoldTerninger = new bool[5];
 
@@ -158,10 +151,12 @@ namespace Yatzy.ViewModel
 
         private void BeregnPoengsum()
         {
-            if (_valgtKombinasjon == YatzyKombinasjon.NotSet || AktivtKast == null)
+            if (_valgtKombinasjon == YatzyKombinasjon.Ukjent || AktivtKast == null)
                 throw new InvalidOperationException("Kan ikke beregne poengsum uten et gyldig kast yatzykombinasjon");
 
-            Poengsum = _beregnerFactory.LagBeregnerForKombinasjon(ValgtKombinasjon).BeregnPoeng(AktivtKast);
+            Poengsum = _beregnerFactory
+						.HentKombinasjonsBeregner(ValgtKombinasjon)
+						.BeregnPoeng(AktivtKast);
         }
 
         private void NotifyPropertyChanged(string propertyName)

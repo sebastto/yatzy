@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Yatzy.Model.Beregnere;
+﻿using Yatzy.Model.Beregnere;
 
 namespace Yatzy.Model
 {
@@ -10,12 +6,12 @@ namespace Yatzy.Model
     {
         public IYatzyBeregner Beregner { get; set; }
 
-        public IYatzyBeregner LagBeregnerForKombinasjon(YatzyKombinasjon kombinasjon)
+        public IYatzyBeregner HentKombinasjonsBeregner(YatzyKombinasjon kombinasjon)
         {
             switch (kombinasjon)
             {
                 case YatzyKombinasjon.Enere:
-                    Beregner = new EnereBeregner();
+                    Beregner = new EnerBeregner();
                     break;
 
                 //case YatzyKombinasjon.Toere:

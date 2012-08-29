@@ -67,7 +67,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel>
-            <TextBlock Text="{Binding Path=KastLabel}" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" TextDecorations="Underline" Margin="0,0,0,15" />
+            <TextBlock Text="{Binding Path=KastLabel}" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" TextDecorations="None" Margin="0,0,0,15" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60">
                 <CheckBox Style="{DynamicResource TerningCheckbox}" Margin="0,0,10,0" IsChecked="{Binding Path=HoldTerninger[0]}">
                     <Image Style="{DynamicResource TerningImage}" Tag="{Binding TerningVerdier[0]}" />

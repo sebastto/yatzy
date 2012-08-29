@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Yatzy.Model
+﻿namespace Yatzy.Model
 {
     public enum YatzyKombinasjon
     {
-        NotSet,
+        Ukjent = 0,
         Enere,
         Toere,
         Treere,

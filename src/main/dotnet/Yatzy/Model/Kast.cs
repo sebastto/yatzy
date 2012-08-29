@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Yatzy.Model
 {
     public class Kast
     {
         private Random _randomGenerator = new Random();
+
         public Terning[] Terninger { get; set; }
 
         public Kast()
