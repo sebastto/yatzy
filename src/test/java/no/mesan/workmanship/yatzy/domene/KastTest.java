@@ -2,7 +2,7 @@ package no.mesan.workmanship.yatzy.domene;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class KastTest {
     @Test

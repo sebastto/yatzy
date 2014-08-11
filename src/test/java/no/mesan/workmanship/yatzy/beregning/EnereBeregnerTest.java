@@ -3,7 +3,7 @@ package no.mesan.workmanship.yatzy.beregning;
 import no.mesan.workmanship.yatzy.domene.Kast;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class EnereBeregnerTest {
     @Test

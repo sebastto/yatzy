@@ -4,5 +4,5 @@ import no.mesan.workmanship.yatzy.domene.Yatzykombinasjon;
 
 
 public interface YatzyBeregner {
-	Integer beregnPoengsum(Yatzykombinasjon yatzykombinasjon, Integer... terninger);
+    Integer beregnPoengsum(Yatzykombinasjon yatzykombinasjon, Integer... terninger);
 }

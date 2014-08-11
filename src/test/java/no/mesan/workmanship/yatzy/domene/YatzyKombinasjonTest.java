@@ -2,10 +2,10 @@ package no.mesan.workmanship.yatzy.domene;
 
 import no.mesan.workmanship.yatzy.beregning.EnereBeregner;
 import no.mesan.workmanship.yatzy.beregning.KastBeregner;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

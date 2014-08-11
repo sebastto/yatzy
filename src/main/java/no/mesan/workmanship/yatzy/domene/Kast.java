@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Kast implements Iterable<Terning> {
 
-    private List<Terning> terninger = new ArrayList<Terning>();
+    private List<Terning> terninger = new ArrayList<>();
 
     public Kast(Integer ... verdier) {
         for (int verdi : verdier) {
