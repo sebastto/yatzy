@@ -7,7 +7,7 @@ public class Beregner implements YatzyBeregner {
 
     @Override
     public Integer beregnPoengsum(Yatzykombinasjon yatzykombinasjon, Integer ... terninger) {
-        Kast kast = new Kast(terninger);
+        final Kast kast = new Kast(terninger);
         return yatzykombinasjon.beregnPoengForKast(kast);
     }
 }

@@ -23,26 +23,26 @@ public enum Yatzykombinasjon implements KastBeregner {
     private final String navn;
     private KastBeregner faktiskBeregner;
 
-    private Yatzykombinasjon(final String navn, final KastBeregner faktiskBeregner) {
+    Yatzykombinasjon(final String navn, final KastBeregner faktiskBeregner) {
         this.navn = navn;
         this.faktiskBeregner = faktiskBeregner;
     }
 
     @Override
-    public Integer beregnPoengForKast(Kast kast) {
-        return faktiskBeregner.beregnPoengForKast(kast);
+    public Integer beregnPoengForKast(final Kast kast) {
+        return this.faktiskBeregner.beregnPoengForKast(kast);
     }
 
     KastBeregner getFaktiskBeregner() {
-        return faktiskBeregner;
+        return this.faktiskBeregner;
     }
 
-    void setFaktiskBeregner(KastBeregner faktiskBeregner) {
+    void setFaktiskBeregner(final KastBeregner faktiskBeregner) {
         this.faktiskBeregner = faktiskBeregner;
     }
 
     @Override
     public String toString() {
-        return navn;
+        return this.navn;
     }
 }

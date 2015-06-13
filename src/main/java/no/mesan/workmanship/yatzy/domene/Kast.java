@@ -10,12 +10,12 @@ public class Kast implements Iterable<Terning> {
 
     public Kast(Integer ... verdier) {
         for (int verdi : verdier) {
-            terninger.add(new Terning(verdi));
+            this.terninger.add(new Terning(verdi));
         }
     }
 
     @Override
     public Iterator<Terning> iterator() {
-        return terninger.iterator();
+        return this.terninger.iterator();
     }
 }

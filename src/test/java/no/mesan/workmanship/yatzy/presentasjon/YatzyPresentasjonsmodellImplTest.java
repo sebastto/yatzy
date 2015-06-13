@@ -1,11 +1,10 @@
 package no.mesan.workmanship.yatzy.presentasjon;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import no.mesan.workmanship.yatzy.beregning.YatzyBeregner;
-import no.mesan.workmanship.yatzy.domene.Yatzykombinasjon;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 
 public class YatzyPresentasjonsmodellImplTest {
@@ -13,39 +12,34 @@ public class YatzyPresentasjonsmodellImplTest {
 
     @Before
     public void settOpp() {
-        presMod = new YatzyPresentasjonsmodellImpl(new YatzyBeregner() {
-            @Override
-            public Integer beregnPoengsum(Yatzykombinasjon yatzykombinasjon, Integer... terninger) {
-                return 0;
-            }
-        });
+        this.presMod = new YatzyPresentasjonsmodellImpl((yatzykombinasjon, terninger) -> 0);
     }
 
     @Test
     public void vedStartSkalNyRundeVaereAv() {
-        assertFalse(presMod.nyRundeAction().isEnabled());
+        assertFalse(this.presMod.nyRundeAction().isEnabled());
     }
 
     @Test
     public void vedStartSkalKastVaerePaa() {
-        assertTrue(presMod.kastAction().isEnabled());
+        assertTrue(this.presMod.kastAction().isEnabled());
     }
 
     @Test
     public void etterTreKastSkalKastVaereAvOgNyRundePaa() {
-        presMod.kastAction().actionPerformed(null);
-        presMod.kastAction().actionPerformed(null);
-        presMod.kastAction().actionPerformed(null);
-        assertFalse(presMod.kastAction().isEnabled());
-        assertTrue(presMod.nyRundeAction().isEnabled());
+        this.presMod.kastAction().actionPerformed(null);
+        this.presMod.kastAction().actionPerformed(null);
+        this.presMod.kastAction().actionPerformed(null);
+        assertFalse(this.presMod.kastAction().isEnabled());
+        assertTrue(this.presMod.nyRundeAction().isEnabled());
     }
 
     @Test
     public void holdtTerningSkalLaasesVedKast() {
-        presMod.kastAction().actionPerformed(null);
-        presMod.holdTerningModeller()[0].setValue(true);
-        presMod.kastAction().actionPerformed(null);
-        assertFalse(presMod.holdTerningModeller()[0].isEnabled());
+        this.presMod.kastAction().actionPerformed(null);
+        this.presMod.holdTerningModeller()[0].setValue(true);
+        this.presMod.kastAction().actionPerformed(null);
+        assertFalse(this.presMod.holdTerningModeller()[0].isEnabled());
     }
 
     /** TODO **/

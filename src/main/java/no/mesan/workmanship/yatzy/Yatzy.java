@@ -1,15 +1,13 @@
 package no.mesan.workmanship.yatzy;
 
-import javax.swing.JFrame;
-import javax.swing.UIManager;
+import javax.swing.*;
 
-import no.mesan.workmanship.yatzy.beregning.AntallOyneBeregner;
 import no.mesan.workmanship.yatzy.beregning.Beregner;
 import no.mesan.workmanship.yatzy.presentasjon.YatzyPresentasjonsmodellImpl;
 import no.mesan.workmanship.yatzy.view.YatzyPanel;
 
-public class Yatzy {
-    public Yatzy() {
+class Yatzy {
+    private Yatzy() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -22,7 +20,7 @@ public class Yatzy {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    };
+    }
 
     public static void main(String[] args) {
         new Yatzy();

@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class TerningTest {
     @Test
-    public void terningTarVarePaVerdi() throws Exception {
+    public void terningTarVarePaVerdi() {
         final Terning t1 = new Terning(1);
         assertEquals(1, t1.asInt().intValue());
 

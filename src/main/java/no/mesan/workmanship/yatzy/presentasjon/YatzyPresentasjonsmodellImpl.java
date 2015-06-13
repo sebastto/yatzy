@@ -1,18 +1,13 @@
 package no.mesan.workmanship.yatzy.presentasjon;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-
-import no.mesan.workmanship.yatzy.beregning.YatzyBeregner;
-import no.mesan.workmanship.yatzy.domene.Yatzykombinasjon;
 
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.ComponentValueModel;
 import com.jgoodies.binding.value.ValueHolder;
+import no.mesan.workmanship.yatzy.beregning.YatzyBeregner;
+import no.mesan.workmanship.yatzy.domene.Yatzykombinasjon;
 
 public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
     private final YatzyBeregner yatzyBeregner;
@@ -34,96 +29,91 @@ public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
     }
 
     private void initModell() {
-        valgtKombinsajonModel = new ComponentValueModel(new ValueHolder());
-        kombinasjonerModel = new SelectionInList<>(Yatzykombinasjon.values());
-        kombinasjonerModel.setSelectionHolder(valgtKombinsajonModel);
-        valgtKombinsajonModel.setValue(Yatzykombinasjon.ENERE);
-        terningModeller = new ComponentValueModel[5];
-        holdTerningModeller = new ComponentValueModel[5];
+        this.valgtKombinsajonModel = new ComponentValueModel(new ValueHolder());
+        this.kombinasjonerModel = new SelectionInList<>(Yatzykombinasjon.values());
+        this.kombinasjonerModel.setSelectionHolder(this.valgtKombinsajonModel);
+        this.valgtKombinsajonModel.setValue(Yatzykombinasjon.ENERE);
+        this.terningModeller = new ComponentValueModel[5];
+        this.holdTerningModeller = new ComponentValueModel[5];
 
         for(int i=0; i<5; i++) {
-            terningModeller[i] = new ComponentValueModel(new ValueHolder(randKast()));
-            terningModeller[i].setEditable(false);
-            holdTerningModeller[i] = new ComponentValueModel(new ValueHolder(Boolean.FALSE));
+            this.terningModeller[i] = new ComponentValueModel(new ValueHolder(randKast()));
+            this.terningModeller[i].setEditable(false);
+            this.holdTerningModeller[i] = new ComponentValueModel(new ValueHolder(Boolean.FALSE));
         }
 
-        poengsumModell = new ComponentValueModel(new ValueHolder(0));
-        poengsumModell.setEditable(false);
-        kastTellerModell = new ComponentValueModel(new ValueHolder(0));
-        kastTellerModell.setEditable(false);
+        this.poengsumModell = new ComponentValueModel(new ValueHolder(0));
+        this.poengsumModell.setEditable(false);
+        this.kastTellerModell = new ComponentValueModel(new ValueHolder(0));
+        this.kastTellerModell.setEditable(false);
     }
 
     @SuppressWarnings("serial")
     private void initActions() {
-        kastAction = new AbstractAction("Kast") {
+        this.kastAction = new AbstractAction("Kast") {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 kastTerninger();
             }
         };
 
-        nyRundeAction = new AbstractAction("Ny runde") {
+        this.nyRundeAction = new AbstractAction("Ny runde") {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 nyRunde();
             }
         };
 
-        kombinasjonerModel.addPropertyChangeListener("selection", new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent arg0) {
-                beregnProengsum();
-            }
-        });
+        this.kombinasjonerModel.addPropertyChangeListener("selection", arg0 -> beregnPoengsum());
     }
 
     @Override
     public ComponentValueModel kastTellerModel() {
-        return kastTellerModell;
+        return this.kastTellerModell;
     }
 
     @Override
     public ComponentValueModel[] holdTerningModeller() {
-        return holdTerningModeller;
+        return this.holdTerningModeller;
     }
 
     @Override
     public Action kastAction() {
-        return kastAction;
+        return this.kastAction;
     }
 
     @Override
     public SelectionInList<Yatzykombinasjon> kombinasjonModel() {
-        return kombinasjonerModel;
+        return this.kombinasjonerModel;
     }
 
     @Override
     public Action nyRundeAction() {
-        return nyRundeAction;
+        return this.nyRundeAction;
     }
 
     @Override
     public ComponentValueModel[] terningModeller() {
-        return terningModeller;
+        return this.terningModeller;
     }
 
     @Override
     public ComponentValueModel poengsumModell() {
-        return poengsumModell;
+        return this.poengsumModell;
     }
 
     private void kastTerninger() {
         kastAktiveTerninger();
-        beregnProengsum();
+        beregnPoengsum();
 
         if(hentAntallKast() == 2) {
-            kastAction.setEnabled(false);
-            nyRundeAction.setEnabled(true);
+            this.kastAction.setEnabled(false);
+            this.nyRundeAction.setEnabled(true);
         }
 
-        kastTellerModell.setEnabled(true);
-        valgtKombinsajonModel.setEnabled(true);
-        poengsumModell.setEnabled(true);
+        this.kastTellerModell.setEnabled(true);
+        this.valgtKombinsajonModel.setEnabled(true);
+        this.poengsumModell.setEnabled(true);
 
         laasHoldteTerninger();
         inkrementerKastTeller();
@@ -135,75 +125,75 @@ public class YatzyPresentasjonsmodellImpl implements YatzyPresentasjonsmodell {
         nullstillKastTeller();
         nullstillPoengsum();
 
-        kastAction.setEnabled(true);
-        nyRundeAction.setEnabled(false);
-        kastTellerModell.setEnabled(false);
-        valgtKombinsajonModel.setEnabled(false);
-        poengsumModell.setEnabled(false);
+        this.kastAction.setEnabled(true);
+        this.nyRundeAction.setEnabled(false);
+        this.kastTellerModell.setEnabled(false);
+        this.valgtKombinsajonModel.setEnabled(false);
+        this.poengsumModell.setEnabled(false);
     }
 
-    private void beregnProengsum() {
+    private void beregnPoengsum() {
         final Integer[] terninger = hentTerninger();
         /// todo lage Kast av terningene
 
-        final Yatzykombinasjon valgtKombinasjon = kombinasjonerModel.getSelection();
+        final Yatzykombinasjon valgtKombinasjon = this.kombinasjonerModel.getSelection();
         // todo bruke Kast som input
-        final Integer nyPoengsum = yatzyBeregner.beregnPoengsum(valgtKombinasjon, terninger);
-        poengsumModell.setValue(nyPoengsum);
+        final Integer nyPoengsum = this.yatzyBeregner.beregnPoengsum(valgtKombinasjon, terninger);
+        this.poengsumModell.setValue(nyPoengsum);
     }
 
     private Integer randKast() {
-        return Integer.valueOf((int)Math.ceil(Math.random() * 6));
+        return (int) Math.ceil(Math.random() * 6);
     }
 
     private Integer[] hentTerninger() {
         final Integer[] terninger = new Integer[5];
         for(int i=0; i<terninger.length; i++) {
-            terninger[i] = (Integer)terningModeller[i].getValue();
+            terninger[i] = (Integer) this.terningModeller[i].getValue();
         }
         return terninger;
     }
 
     private void laasHoldteTerninger() {
-        for(final ComponentValueModel holdModell : holdTerningModeller) {
+        for(final ComponentValueModel holdModell : this.holdTerningModeller) {
             holdModell.setEnabled(!holdModell.getValue().equals(Boolean.TRUE));
         }
     }
 
     private void nullstillPoengsum() {
-        poengsumModell.setValue(0);
+        this.poengsumModell.setValue(0);
     }
 
     private void kastAktiveTerninger() {
         for(int i=0; i<5; i++) {
-            if(holdTerningModeller[i].getValue().equals(Boolean.FALSE)) {
-                terningModeller[i].setValue(randKast());
+            if(this.holdTerningModeller[i].getValue().equals(Boolean.FALSE)) {
+                this.terningModeller[i].setValue(randKast());
             }
         }
     }
 
     private void nullstillTerninger() {
-        for(final ComponentValueModel terningModel : terningModeller) {
+        for(final ComponentValueModel terningModel : this.terningModeller) {
             terningModel.setValue(null);
         }
     }
 
     private void nullstillHoldmodeller() {
-        for(final ComponentValueModel holdModell : holdTerningModeller) {
+        for(final ComponentValueModel holdModell : this.holdTerningModeller) {
             holdModell.setValue(Boolean.FALSE);
             holdModell.setEnabled(false);
         }
     }
 
     private void nullstillKastTeller() {
-        kastTellerModell.setValue(0);
+        this.kastTellerModell.setValue(0);
     }
 
     private void inkrementerKastTeller() {
-        kastTellerModell.setValue((Integer)kastTellerModell.getValue() + 1);
+        this.kastTellerModell.setValue((Integer) this.kastTellerModell.getValue() + 1);
     }
 
     private Integer hentAntallKast() {
-        return (Integer)kastTellerModell.getValue();
+        return (Integer) this.kastTellerModell.getValue();
     }
 }

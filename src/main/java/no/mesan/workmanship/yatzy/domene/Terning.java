@@ -1,6 +1,6 @@
 package no.mesan.workmanship.yatzy.domene;
 
-public class Terning {
+class Terning {
 
     private Integer verdi;
 
@@ -9,6 +9,6 @@ public class Terning {
     }
 
     public Integer asInt() {
-        return verdi;
+        return this.verdi;
     }
 }
