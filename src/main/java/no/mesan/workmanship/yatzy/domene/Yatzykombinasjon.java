@@ -2,6 +2,7 @@ package no.mesan.workmanship.yatzy.domene;
 
 import no.mesan.workmanship.yatzy.beregning.EnereBeregner;
 import no.mesan.workmanship.yatzy.beregning.KastBeregner;
+import no.mesan.workmanship.yatzy.beregning.ManglerBeregner;
 
 public enum Yatzykombinasjon implements KastBeregner {
     ENERE("Enere", new EnereBeregner()),
@@ -25,7 +26,7 @@ public enum Yatzykombinasjon implements KastBeregner {
 
     Yatzykombinasjon(final String navn, final KastBeregner faktiskBeregner) {
         this.navn = navn;
-        this.faktiskBeregner = faktiskBeregner;
+        this.faktiskBeregner = faktiskBeregner== null? new ManglerBeregner("Kan ikke beregne " +navn) : faktiskBeregner;
     }
 
     @Override

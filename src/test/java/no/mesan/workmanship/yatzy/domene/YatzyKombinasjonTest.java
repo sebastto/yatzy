@@ -30,5 +30,7 @@ public class YatzyKombinasjonTest {
 
         assertEquals(5, beregnetVerdi);
         verify(beregner).beregnPoengForKast(kast);
+        // reset
+        enere.setFaktiskBeregner(new EnereBeregner());
     }
 }
