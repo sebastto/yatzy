@@ -1,6 +1,6 @@
 package no.mesan.workmanship.yatzy.domene;
 
-class Terning {
+public class Terning {
 
     private Integer verdi;
 
