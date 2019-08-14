@@ -1,16 +1,15 @@
 package com.netcompany.workmanship.yatzy.presentasjon;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class YatzyPresentasjonsmodellImplTest {
     private YatzyPresentasjonsmodellImpl presMod;
 
-    @Before
+    @BeforeEach
     public void settOpp() {
         this.presMod = new YatzyPresentasjonsmodellImpl((yatzykombinasjon, terninger) -> 0);
     }

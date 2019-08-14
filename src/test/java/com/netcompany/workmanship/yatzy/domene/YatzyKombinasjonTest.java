@@ -2,10 +2,10 @@ package com.netcompany.workmanship.yatzy.domene;
 
 import com.netcompany.workmanship.yatzy.beregning.EnereBeregner;
 import com.netcompany.workmanship.yatzy.beregning.KastBeregner;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
