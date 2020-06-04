@@ -3,12 +3,12 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>no.mesan</groupId>
+    <groupId>com.netcompany</groupId>
     <artifactId>yatzy</artifactId>
     <name>yatzy kata</name>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <url>https://github.com/mesan/yatzy</url>
+    <url>https://github.com/netcompanyno/yatzy</url>
 
     <build>
         <defaultGoal>package</defaultGoal>
@@ -33,7 +33,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>no.mesan.workmanship.yatzy.Yatzy</mainClass>
+                            <mainClass>com.netcompany.workmanship.yatzy.Yatzy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
