@@ -3,37 +3,33 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.netcompany</groupId>
+    <groupId>net.kalars</groupId>
     <artifactId>yatzy</artifactId>
-    <name>yatzy kata</name>
+    <name>yatzy til fagarbeid</name>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <url>https://github.com/netcompanyno/yatzy</url>
+    <url>https://github.com/larsreed/yatzy</url>
+
+    <properties>
+        <java.version>19</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
 
     <build>
         <defaultGoal>package</defaultGoal>
 
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerVersion>1.8</compilerVersion>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
+                <version>3.4.2</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.netcompany.workmanship.yatzy.Yatzy</mainClass>
+                            <mainClass>net.kalars.workmanship.yatzy.Yatzy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -50,7 +46,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M7</version>
             </plugin>
         </plugins>
     </build>
@@ -59,19 +55,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.5.1</version>
+            <version>5.9.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.1</version>
+            <version>5.9.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.0.0</version>
+            <version>4.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
