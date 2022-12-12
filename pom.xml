@@ -8,7 +8,7 @@
     <name>yatzy til fagarbeid</name>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <url>https://github.com/larsreed/yatzy</url>
+    <url>https://github.com/toll/yatzy</url>
 
     <properties>
         <java.version>19</java.version>
@@ -29,7 +29,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>net.kalars.workmanship.yatzy.Yatzy</mainClass>
+                            <mainClass>no.toll.workmanship.yatzy.Yatzy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
