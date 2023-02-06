@@ -2,7 +2,7 @@
 
 Utgangspunkt for kursene "Tvungen OO" og TDD
 
-## Regler'
+## Regler
 
 Man kan ha lange og lite gode diskusjoner om reglene i Yatzy. De som har betydning for vår implementasjon kommer her:
 1.	det spilles med 5 terninger
