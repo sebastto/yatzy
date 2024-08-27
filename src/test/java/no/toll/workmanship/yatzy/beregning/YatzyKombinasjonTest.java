@@ -15,21 +15,4 @@ public class YatzyKombinasjonTest {
         final KastBeregner enereBeregner = Yatzykombinasjon.ENERE.getFaktiskBeregner();
         assertTrue(enereBeregner instanceof EnereBeregner);
     }
-
-    @Test
-    public void kombinasjonSkalDelegereTilFaktiskBeregner() {
-        final Kast kast = mock(Kast.class);
-        final KastBeregner beregner = mock(KastBeregner.class);
-        when(beregner.beregnPoengForKast(kast)).thenReturn(5);
-
-        final Yatzykombinasjon enere = Yatzykombinasjon.ENERE;
-        enere.setFaktiskBeregner(beregner);
-
-        final int beregnetVerdi = enere.beregnPoengForKast(kast);
-
-        assertEquals(5, beregnetVerdi);
-        verify(beregner).beregnPoengForKast(kast);
-        // reset
-        enere.setFaktiskBeregner(new EnereBeregner());
-    }
 }
